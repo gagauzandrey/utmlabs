@@ -1,6 +1,5 @@
 #include <stdio.h> 
 #include <math.h> 
-#include <conio.h>
 
 float getFuncValue(float a, float b, float c, float x); 
 
@@ -8,7 +7,6 @@ int main() {
     float   a, b, c;
     float   startX, endX, dX;
     float   F;
-
     
     printf("Enter:");
     printf("\ta = "); scanf("%f", &a);
@@ -43,8 +41,8 @@ float getFuncValue(float a, float b, float c, float x) {
     {
         res = (4 * x + 8) / (float)pow(a, 2) + sin(x); 
     }
-    return res; 
 
+    return res; 
 }
 
 
