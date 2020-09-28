@@ -41,7 +41,6 @@ float getFuncValue(float a, float b, float c, float x) {
     {
         res = (4 * x + 8) / pow(a, 2) + sin(x); 
     }
-
     return res; 
 }
 
