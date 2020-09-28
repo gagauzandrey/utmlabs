@@ -35,11 +35,11 @@ float getFuncValue(float a, float b, float c, float x) {
     }
     else if (x + c > 0 && b != 0)
     {
-        res = (sin(a) - x + 3) / (float)pow(c, 2); 
+        res = (sin(a) - x + 3) / pow(c, 2); 
     }
     else
     {
-        res = (4 * x + 8) / (float)pow(a, 2) + sin(x); 
+        res = (4 * x + 8) / pow(a, 2) + sin(x); 
     }
 
     return res; 
