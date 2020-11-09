@@ -131,16 +131,16 @@ int allocate(int **A, int N, int M)
 void fillRand(int **A, int N, int M)
 {
     srand(time(0));
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < M; j++)
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < M; ++j)
             A[i][j] = -5 + rand() % 15;
 }
 
 void fillUser(int **A, int N, int M)
 {
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; ++i)
     {
-        for (int j = 0; j < M; j++)
+        for (int j = 0; j < M; ++j)
         {
             printf("A[%d][%d] = ", i, j);
             scanf("%d", &A[i][j]);
@@ -172,9 +172,9 @@ void sortArr(int **A, int N, int M)
 
 void printArr(int **A, int N, int M)
 {
-    for (int i = 0; i < N; i++)
+    for (int i = 0; i < N; ++i)
     {
-        for (int j = 0; j < M; j++)
+        for (int j = 0; j < M; ++j)
         {
             printf("%2d\t", A[i][j]);
         }
