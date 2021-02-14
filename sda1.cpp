@@ -43,6 +43,9 @@ bool cmpByHpDown(const CARS &a, const CARS &b);
 bool cmpByPriceUp(const CARS &a, const CARS &b);
 bool cmpByPriceDown(const CARS &a, const CARS &b);
 void changeElement(size_t pos, std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price);
+void pushElement(std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price);
+void deleteElement(size_t pos, std::vector<CARS> &cars);
+void insertElement(size_t pos, std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price);
 
 int main()
 {
@@ -51,7 +54,7 @@ int main()
     std::vector<CARS> cars;
     open_file(file, cars);
 
-    /* for (int i = 0; i < cars.size(); ++i) {
+    /* for (int i = 0; i < cars.size(); ++i) {121``1
         cars[i].print();
     } */
 
@@ -68,7 +71,10 @@ int main()
         cars[i].print();
     }
 
-    sortMenu(cars);
+    std::cout << std::endl;
+    // pushElement(cars, "Porche", "Cayen", "Italy", 2020, 650, 150000);
+    deleteElement(2, cars);
+    insertElement(4, cars, "Porche", "Cayen", "Italy", 2020, 650, 150000);
 
     for (int i = 0; i < cars.size(); ++i)
     {
@@ -87,10 +93,12 @@ void open_file(std::ifstream &file, std::vector<CARS> &cars)
         size_t pos = 0;
         std::string token;
         std::string buf;
-        std::string delim = ",\n";
+        std::string delim = ",";
         std::vector<std::vector<std::string>> out_stream;
+        std::string skip = "Name";
         while (getline(file, buf, '\n'))
         {
+            if(!(buf.find(skip))) continue;
             std::vector<std::string> tmp;
             while ((pos = buf.find(delim)) != std::string::npos)
             {
@@ -327,5 +335,47 @@ void changeElement(size_t pos, std::vector<CARS> &cars, std::string name, std::s
         cars[pos - 1].year = year;
         cars[pos - 1].hp = hp;
         cars[pos - 1].price = price;
+    }
+}
+
+void pushElement(std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price) {
+    CARS tmp;
+    tmp.name = name;
+    tmp.model = model;
+    tmp.country = country;
+    tmp.year = year;
+    tmp.hp = hp;
+    tmp.price = price;
+    cars.push_back(tmp);
+}
+
+void deleteElement(size_t pos, std::vector<CARS> &cars) {
+    size_t len = cars.size();
+    if (pos > len || pos < 0)
+    {
+        std::cout << "Incorrect index" << std::endl;
+    }
+    else
+    {
+        cars.erase(cars.begin() + (pos - 1));
+    }
+}
+
+void insertElement(size_t pos, std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price) {
+    size_t len = cars.size();
+    if (pos > len || pos < 0)
+    {
+        std::cout << "Incorrect index" << std::endl;
+    }
+    else
+    {   
+        CARS tmp;
+        tmp.name = name;
+        tmp.model = model;
+        tmp.country = country;
+        tmp.year = year;
+        tmp.hp = hp;
+        tmp.price = price;
+        cars.insert(cars.begin() + (pos - 1), tmp);
     }
 }
