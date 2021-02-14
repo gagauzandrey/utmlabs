@@ -12,12 +12,12 @@ void addEdge(vector<int> adjList[], int s, int d)
 // Print the graph
 void printAdjList(vector<int> adjList[], int V)
 {
-    for (int d = 0; d < V; ++d)
+    for (int i = 0; i < V; ++i)
     {
-        cout << d + 1;
-        for (auto x : adjList[d])
+        cout << i + 1;
+        for (auto x : adjList[i])
             cout << " -> " << x + 1;
-        printf("\n");
+        cout << endl;
     }
 }
 
@@ -35,13 +35,13 @@ int main()
     addEdge(adjList, 1, 3);
     addEdge(adjList, 2, 0);
     addEdge(adjList, 2, 1);
-    addEdge(adjList, 3, 2); 
+    addEdge(adjList, 3, 2);
 
     vector<vector<int>> adjMat;
     vector<vector<int>> incMat;
 
     // init adj matrix to 0
-    /* for (int i = 0; i < V; ++i)
+    for (int i = 0; i < V; ++i)
     {
         vector<int> tmp;
         for (int j = 0; j < V; ++j)
@@ -49,7 +49,7 @@ int main()
             tmp.push_back(0);
         }
         adjMat.push_back(tmp);
-    } */
+    }
 
     // list to adj matrix
     /* for (int i = 0; i < V; ++i)
@@ -65,7 +65,7 @@ int main()
     // input the adj matrix
 
     int num = 0;
-    /* for (int i = 0; i < V; ++i)
+    for (int i = 0; i < V; ++i)
     {
         vector<int> tmp;
         for (int j = 0; j < V; ++j)
@@ -104,11 +104,11 @@ int main()
             cout << " " << adjMat[i][j] << '\t';
         }
         cout << endl;
-    } */
+    }
 
-    // input the incedence matrix
+        // input the incedence matrix
 
-   /*  for (int i = 0; i < E; ++i)
+        /*  for (int i = 0; i < E; ++i)
     {
         vector<int> tmp;
         for (int j = 0; j < V; ++j)
@@ -119,7 +119,7 @@ int main()
         incMat.push_back(tmp);
     }
  */
-    /* // printing the incedence matrix
+        /* // printing the incedence matrix
     cout << '\t';
     for (int k = 0; k < V; ++k)
     {
@@ -154,30 +154,71 @@ int main()
             }
         }
     } */
-
-    // adjList to incMat
-/*     int q = 0;
+        // get edges of matrix
+        vector<vector<int>> edge_mat;
     for (int i = 0; i < V; ++i)
     {
-        int k;
+        vector<int> tmp;
         for (int j = 0; j < adjList[i].size(); ++j)
         {
-            k = adjList[i][j];
-            incMat[i][k] = 1;
+            tmp.push_back(i);
+            tmp.push_back(adjList[i][j]);
+            edge_mat.push_back(tmp);
+            tmp.clear();
         }
-        if (q < E)
+    }
+
+    // init inc matrix to 0
+    /* for (int i = 0; i < E; ++i)
+    {
+        vector<int> tmp;
+        for (int j = 0; j < V; ++j)
         {
-            ++q;
+            tmp.push_back(0);
         }
+        incMat.push_back(tmp);
     } */
 
-    // 
-    vector <vector<int>> edge_mat;
-    for (int i = 0; i < V; ++i) {
-        vector <int> tmp;
-        for (int j = 0; j < adjList[i].size(); ++j) {
-            tmp.push_back(adjList[i][j]);
+    // adjList to incMat
+    /* int start_v, end_v;
+    for (int i = 0; i < edge_mat.size(); ++i)
+    {
+        start_v = edge_mat[i][0];
+        end_v = edge_mat[i][1];
+        incMat[i][start_v] = -1;
+        incMat[i][end_v] = 1;
+    } */
+
+    int edges = 0;
+    for (int i = 0; i < V; ++i)
+    {
+        for (int j = 0; j < V; ++j)
+        {
+            if (adjMat[i][j] == 1)
+            {
+                incMat[edges][j] = 1;
+                incMat[edges][i] = -1;
+                edges++;
+            }
         }
+    }
+
+    // printing the inc mat
+    cout << '\t';
+    for (int k = 0; k < V; ++k)
+    {
+        cout << "x" << k + 1 << '\t';
+    }
+    cout << endl;
+
+    for (int i = 0; i < incMat.size(); i++)
+    {
+        cout << "e" << i + 1 << '\t';
+        for (int j = 0; j < incMat[i].size(); j++)
+        {
+            cout << " " << incMat[i][j] << '\t';
+        }
+        cout << endl;
     }
 
     printAdjList(adjList, V);
