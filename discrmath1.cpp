@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 void initAdjMat(vector<vector<int>> &adjMat, size_t V);
@@ -23,7 +24,18 @@ void printOutputMenu();
 
 int main()
 {
-    int V = 4, E = 6;
+    int V = 0, E = 0;
+    while (V <= 0)
+    {
+        cout << "Num of Vertices: ";
+        cin >> V;
+    }
+
+    while (E <= 0)
+    {
+        cout << "Num of Edges: ";
+        cin >> E;
+    }
     vector<int> adjList[V];
     vector<vector<int>> adjMat;
     vector<vector<int>> incMat;
