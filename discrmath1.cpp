@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 void initAdjMat(vector<vector<int>> &adjMat, size_t V);
