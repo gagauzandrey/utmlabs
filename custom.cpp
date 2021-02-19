@@ -16,35 +16,49 @@ void open_file(std::ifstream &read_file, std::vector<CARS> &cars)
 {
     if (read_file.is_open())
     {
-        size_t i = 0;
-        size_t pos = 0;
-        std::string token;
         std::string buf;
-        std::string delim = ",";
-        std::vector<std::vector<std::string>> out_stream;
-        std::string skip = "Name";
+        char line[100] = {};
         while (getline(read_file, buf, '\n'))
         {
-            if (!(buf.find(skip)))
+            char line[100];
+            strcpy(line, buf.c_str());
+            const char *delim = ",\"\n";
+            char *token = strtok(line, delim);
+
+            if (!strcmp(token, "Name"))
                 continue;
-            std::vector<std::string> tmp;
-            while ((pos = buf.find(delim)) != std::string::npos)
+
+            CARS tmp;
+
+            while (token)
             {
-                token = buf.substr(0, pos);
-                tmp.push_back(token);
-                buf.erase(0, pos + delim.length());
+                if (tmp.name == "")
+                {
+                    tmp.name = token;
+                }
+                else if (tmp.model == "")
+                {
+                    tmp.model = token;
+                }
+                else if (tmp.country == "")
+                {
+                    tmp.country = token;
+                }
+                else if (tmp.year == 0)
+                {
+                    tmp.year = atoi(token);
+                }
+                else if (tmp.hp == 0)
+                {
+                    tmp.hp = atoi(token);
+                }
+                else if (tmp.price == 0)
+                {
+                    tmp.price = atoi(token);
+                }
+                token = strtok(NULL, delim);
             }
-            CARS tmp_car;
-            out_stream.push_back(tmp);
-            tmp.clear();
-            tmp_car.name = out_stream[i][0];
-            tmp_car.model = out_stream[i][1];
-            tmp_car.country = out_stream[i][2];
-            tmp_car.year = atoi(out_stream[i][3].c_str());
-            tmp_car.hp = atoi(out_stream[i][4].c_str());
-            tmp_car.price = atoi(out_stream[i][5].c_str());
-            cars.push_back(tmp_car);
-            i++;
+            cars.push_back(tmp);
         }
     }
     else
@@ -313,5 +327,5 @@ void insertElement(size_t pos, std::vector<CARS> &cars, std::string name, std::s
 
 void writeToFile(std::ofstream &write_file, std::string name, std::string model, std::string country, int year, int hp, int price)
 {
-    write_file << name << "," << model << "," << country << "," << year << "," << hp << "," << price << "," << std::endl;
+    write_file << name << "," << model << "," << country << "," << year << "," << hp << "," << price << std::endl;
 }
