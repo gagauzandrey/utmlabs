@@ -265,7 +265,7 @@ void sortMenu(std::vector<CARS> &cars)
 void changeElement(size_t pos, std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price)
 {
     size_t len = cars.size();
-    if (pos > len || pos < 0)
+    if (pos > len || pos <= 0)
     {
         std::cout << "Incorrect index" << std::endl;
     }
@@ -295,7 +295,7 @@ void pushElement(std::vector<CARS> &cars, std::string name, std::string model, s
 void deleteElement(size_t pos, std::vector<CARS> &cars)
 {
     size_t len = cars.size();
-    if (pos > len || pos < 0)
+    if (pos > len || pos <= 0)
     {
         std::cout << "Incorrect index" << std::endl;
     }
@@ -308,7 +308,7 @@ void deleteElement(size_t pos, std::vector<CARS> &cars)
 void insertElement(size_t pos, std::vector<CARS> &cars, std::string name, std::string model, std::string country, int year, int hp, int price)
 {
     size_t len = cars.size();
-    if (pos > len || pos < 0)
+    if (pos > len || pos <= 0)
     {
         std::cout << "Incorrect index" << std::endl;
     }
