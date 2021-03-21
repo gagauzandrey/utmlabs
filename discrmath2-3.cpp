@@ -16,8 +16,8 @@ struct Graph
     status *visited;
     std::list<int> *adjLists;
     Graph(int vertices);
+    ~Graph();
     void addEdge(int src, int dst);
-    void sortAdj();
     void printAdjLists();
     void DFS(int strt);
     void BFS(int strt);
@@ -60,7 +60,6 @@ int main()
                         g.addEdge(i, dst);
                     }
                 }
-                g.sortAdj();
 
                 std::cout << std::endl;
                 std::cout << "Your graph: " << std::endl;
@@ -91,7 +90,6 @@ int main()
                             g.addEdge(i, dst);
                         }
                     }
-                    g.sortAdj();
 
                     std::cout << std::endl;
                     std::cout << "Your graph: " << std::endl;
@@ -137,7 +135,6 @@ int main()
                             g.addEdge(i, dst);
                         }
                     }
-                    g.sortAdj();
 
                     std::cout << std::endl;
                     std::cout << "Your graph: " << std::endl;
@@ -184,7 +181,6 @@ int main()
                             g.addEdge(i, dst);
                         }
                     }
-                    g.sortAdj();
 
                     std::cout << std::endl;
                     std::cout << "Your graph: " << std::endl;
@@ -204,6 +200,10 @@ Graph::Graph(int vertices)
 {
     numVertices = vertices;
     adjLists = new std::list<int>[vertices];
+}
+
+Graph::~Graph() {
+    delete [] adjLists;
 }
 
 void Graph::addEdge(int src, int dst)
@@ -276,14 +276,6 @@ void Graph::BFS(int strt)
         std::cout << curr << "\t";
     }
     delete[] visited;
-}
-
-void Graph::sortAdj()
-{
-    for (int i = 0; i < numVertices; ++i)
-    {
-        adjLists[i].sort();
-    }
 }
 
 void Graph::printAdjLists()
